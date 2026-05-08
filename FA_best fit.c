@@ -1,17 +1,20 @@
 #include <stdio.h>
 
-int main() {
+int main() 
+{
     int n;
     printf("Enter number of memory blocks: ");
     scanf("%d", &n);
 
     int memory[n];
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+     {
         printf("Enter size of block %d: ", i + 1);
         scanf("%d", &memory[i]);
     }
 
-    while (1) {
+    while (1) 
+    {
         int size, bestIndex = -1;
         printf("\nEnter size needed (0 to exit): ");
         scanf("%d", &size);
@@ -19,18 +22,24 @@ int main() {
         if (size == 0) break;
 
         // Find the best fitting block (smallest sufficient)
-        for (int i = 0; i < n; i++) {
-            if (memory[i] >= size) {
-                if (bestIndex == -1 || memory[i] < memory[bestIndex]) {
+        for (int i = 0; i < n; i++) 
+        {
+            if (memory[i] >= size) 
+            {
+                if (bestIndex == -1 || memory[i] < memory[bestIndex])
+                 {
                     bestIndex = i;
                 }
             }
         }
 
-        if (bestIndex != -1) {
+        if (bestIndex != -1) 
+        {
             memory[bestIndex] -= size;
             printf("Allocated in block %d\n", bestIndex + 1);
-        } else {
+        } 
+        else 
+        {
             printf("No suitable block found\n");
         }
     }
