@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main() {
+int main()
+{
     int n, i, tq;
     printf("Enter the number of processes: ");
     scanf("%d", &n);
@@ -9,10 +10,12 @@ int main() {
     int waiting[n], turnaround[n];
 
     // --------- Input ---------
-    for (i = 0; i < n; i++) {
+    
+    for (i = 0; i < n; i++)
+    {
         process[i] = i + 1;
         printf("Enter arrival time of process %d: ", process[i]);
-        scanf("%d", &arrival[i]);
+        scanf("%d", &arrival[i]); 
         printf("Enter burst time of process %d: ", process[i]);
         scanf("%d", &burst[i]);
 
@@ -26,22 +29,27 @@ int main() {
     int time = 0, completed = 0;
 
     // --------- Hybrid SRTF + Quantum ---------
-    while (completed < n) {
+    while (completed < n)
+    {
         int min_index = -1;
         int min_remaining = 9999;
 
         // find shortest remaining time process among arrived ones
-        for (i = 0; i < n; i++) {
-            if (arrival[i] <= time && remaining[i] > 0 && remaining[i] < min_remaining) {
+        for (i = 0; i < n; i++)
+        {
+            if (arrival[i] <= time && remaining[i] > 0 && remaining[i] < min_remaining)
+            {
                 min_remaining = remaining[i];
                 min_index = i;
             }
         }
 
         // No process arrived → jump to next arrival time
-        if (min_index == -1) {
+        if (min_index == -1)
+        {
             int next_arrival = 9999;
-            for (i = 0; i < n; i++) {
+            for (i = 0; i < n; i++)
+            {
                 if (arrival[i] > time && arrival[i] < next_arrival)
                     next_arrival = arrival[i];
             }
@@ -55,7 +63,8 @@ int main() {
         time += exec_time;
 
         // If process finished
-        if (remaining[min_index] == 0) {
+        if (remaining[min_index] == 0)
+        {
             completion[min_index] = time;
             completed++;
         }
@@ -65,7 +74,8 @@ int main() {
     float total_wt = 0, total_tat = 0;
 
     printf("\nProcess\tArrival\tBurst\tCompletion\tTurnaround\tWaiting\n");
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < n; i++)
+    {
         turnaround[i] = completion[i] - arrival[i];
         waiting[i] = turnaround[i] - burst[i];
 
