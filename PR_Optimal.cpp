@@ -15,8 +15,11 @@ int find_optimal(int frames[], int frame_count, int pages[], int n, int index) {
     int pos = -1;
 
     for (int i = 0; i < frame_count; i++) {
-        for (int j = index; j < n; j++) {
+        int j;
+        int found = 0;
+        for (j = index; j < n; j++) {
             if (frames[i] == pages[j]) {
+                found = 1;
                 if (j > farthest) {
                     farthest = j;
                     pos = i;
@@ -24,7 +27,7 @@ int find_optimal(int frames[], int frame_count, int pages[], int n, int index) {
                 break;
             }
         }
-        if (j == n) {
+        if (!found) {
             // If the page in frame[i] is never used again
             return i;
         }
