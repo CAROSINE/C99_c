@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main() {
+int main() 
+{
     int n, i, tq;
 
     printf("Enter the number of processes: ");
@@ -10,7 +11,8 @@ int main() {
     int waiting[n], turnaround[n];
 
     // ----- Input process details -----
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) 
+    {
         process[i] = i + 1;
         printf("Enter arrival time of process %d: ", process[i]);
         scanf("%d", &arrival[i]);
@@ -33,22 +35,28 @@ int main() {
         visited[i] = 0;
 
     // Add processes that arrive at time = 0
-    for (i = 0; i < n; i++) {
-        if (arrival[i] == 0) {
+    for (i = 0; i < n; i++) 
+    {
+        if (arrival[i] == 0) 
+        {
             queue[rear++] = i;
             visited[i] = 1;
         }
     }
 
     // ----- Round Robin Execution -----
-    while (completed < n) {
+    while (completed < n) 
+    {
 
         // If queue is empty → jump to next arrival
-        if (front == rear) {
+        if (front == rear) 
+        {
             int next_arrival = 9999;
 
-            for (i = 0; i < n; i++) {
-                if (remaining[i] > 0 && arrival[i] > time && arrival[i] < next_arrival) {
+            for (i = 0; i < n; i++) 
+            {
+                if (remaining[i] > 0 && arrival[i] > time && arrival[i] < next_arrival) 
+                {
                     next_arrival = arrival[i];
                 }
             }
@@ -56,8 +64,10 @@ int main() {
             time = next_arrival;
 
             // Add processes that have arrived now
-            for (i = 0; i < n; i++) {
-                if (arrival[i] <= time && remaining[i] > 0 && !visited[i]) {
+            for (i = 0; i < n; i++) 
+            {
+                if (arrival[i] <= time && remaining[i] > 0 && !visited[i]) 
+                {
                     queue[rear++] = i;
                     visited[i] = 1;
                 }
@@ -67,10 +77,13 @@ int main() {
         int idx = queue[front++];
 
         // Process execution
-        if (remaining[idx] > tq) {
+        if (remaining[idx] > tq) 
+        {
             time += tq;
             remaining[idx] -= tq;
-        } else {
+        } 
+        else 
+        {
             time += remaining[idx];
             remaining[idx] = 0;
             completion[idx] = time;
@@ -78,15 +91,18 @@ int main() {
         }
 
         // Add processes that have arrived during execution
-        for (i = 0; i < n; i++) {
-            if (arrival[i] <= time && remaining[i] > 0 && !visited[i]) {
+        for (i = 0; i < n; i++) 
+        {
+            if (arrival[i] <= time && remaining[i] > 0 && !visited[i]) 
+            {
                 queue[rear++] = i;
                 visited[i] = 1;
             }
         }
 
         // If current process is not finished → push back to queue
-        if (remaining[idx] > 0) {
+        if (remaining[idx] > 0) 
+        {
             queue[rear++] = idx;
         }
     }
