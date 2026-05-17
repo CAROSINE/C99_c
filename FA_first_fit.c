@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 int main() 
 {
     int n;
@@ -13,7 +12,7 @@ int main()
         scanf("%d", &memory[i]);
     }
 
-    while (1)
+    while (1) 
     {
         int size, allocated = 0;
         printf("\nEnter size needed (0 to exit): ");
@@ -23,8 +22,10 @@ int main()
 
         for (int i = 0; i < n; i++) 
         {
+                
             if (memory[i] >= size) 
             {
+                memory[i] -= size;
                 printf("Allocated in block %d\n", i + 1);
                 allocated = 1;
                 break;
