@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main() {
+int main() 
+{
     int emp_number, worked_hours;
     float rate_per_hour, salary;
 
